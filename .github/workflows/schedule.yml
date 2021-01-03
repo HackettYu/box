@@ -30,4 +30,4 @@ jobs:
           node index.js
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIST_ID: 1b0d9e5419587403f2d5fdbb40d9ae45
+          GIST_ID: ${{ secrets.GIST_ID }}
