@@ -21,14 +21,14 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
             let title = target.find('span').text()
             if (rank == null || Number(rank) <= 0) {
                 // this is a pinned title
-                list.push(`Pin ${title}`)
+                list.push(`rank,title,number,Pin ${title}`)
             } else {
                 const res = /[0-9]+[\s]*$/.exec(title)
                 let number = 'UNKNOWN'
                 if (res != null)
                     number = res[0].trim()
-                title = title.trim().replace(number, '')
-                list.push(`${rank} ${title} ${number}`)
+                title = title.trim().replace(number, '').replace(',', '.')
+                list.push(`${rank},${title},${number},`)
             }
         })
         return list
