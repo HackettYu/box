@@ -4,6 +4,7 @@
 
 ```bash
 yarn install
+node index.js
 ```
 
 ## Github action

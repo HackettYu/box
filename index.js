@@ -15,7 +15,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
       const { data } = res
       const $ = cheerio.load(data)
       const list = []
-      $('ul.list_a').find('li').map(function () {
+      $('ul.list_a').find('li').map( () => {
         const target = $(this)
         const rank = target.find('.hot').text()
         let title = target.find('span').text()
