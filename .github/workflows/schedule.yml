@@ -1,4 +1,4 @@
-name: Update gist with Weibo Rank stats
+name: "Github Action: Update gist with Weibo Rank stats"
 on:
   push:
     branches:

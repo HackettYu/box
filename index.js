@@ -30,7 +30,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
                 if (res != null)
                     number = res[0].trim()
                 title = title.trim().replace(number, '').replace(',', '.')
-                list.push(`${rank},${title},${number},`)
+                list.push(`${rank},${title},${number}`)
             }
         })
         return list, desc
