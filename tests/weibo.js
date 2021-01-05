@@ -6,23 +6,25 @@ axios.get('https://s.weibo.com/top/summary').then(res => {
         const { data } = res
         const $ = cheerio.load(data)
         const list = []
+        let desc = ''
         $('ul.list_a').find('li').map(function () {
             const target = $(this)
             const rank = target.find('.hot').text()
             let title = target.find('span').text()
             if (rank == null || Number(rank) <= 0) {
+                list.push(`rank,title,number`)
                 // this is a pinned title
-                list.push(`Pin ${title}`)
+                desc = `Pin ${title}`
             } else {
                 const res = /[0-9]+[\s]*$/.exec(title)
                 let number = 'UNKNOWN'
                 if (res != null)
                     number = res[0].trim()
-                title = title.trim().replace(number, '')
-                list.push(`${rank} ${title} ${number}`)
+                title = title.trim().replace(number, '').replace(',', '.')
+                list.push(`${rank},${title},${number},`)
             }
         })
-        return list
+        return list, desc
     } else {
         throw new Error('Cannot fetch rank data')
     }

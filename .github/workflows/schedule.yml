@@ -4,7 +4,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: "* 1/4 * * *"
+    - cron: "* * * * *"
 jobs:
   checker:
     runs-on: ubuntu-latest
