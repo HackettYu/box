@@ -23,7 +23,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
             if (rank == null || Number(rank) <= 0) {
                 list.push(`rank,title,number`)
                 // this is a pinned title
-                desc = `Pin ${title}`
+                desc = `# Pin ${title}`
             } else {
                 const res = /[0-9]+[\s]*$/.exec(title)
                 let number = 'UNKNOWN'
@@ -48,7 +48,6 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
             throw error
         })
         const fileName = Object.keys(gist.data.files)[0]
-
         await octokit.gists.update({
             gist_id: gistId,
             description: desc,
