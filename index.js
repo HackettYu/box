@@ -15,13 +15,15 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
         const { data } = res
         const $ = cheerio.load(data)
         const list = []
+        const desc = ''
         $('ul.list_a').find('li').map(function () {
             const target = $(this)
             const rank = target.find('.hot').text()
             let title = target.find('span').text()
             if (rank == null || Number(rank) <= 0) {
+                list.push(`rank,title,number`)
                 // this is a pinned title
-                list.push(`rank,title,number,Pin ${title}`)
+                desc = `Pin ${title}`
             } else {
                 const res = /[0-9]+[\s]*$/.exec(title)
                 let number = 'UNKNOWN'
@@ -31,7 +33,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
                 list.push(`${rank},${title},${number},`)
             }
         })
-        return list
+        return list, desc
     } else {
         throw new Error('Cannot fetch rank data')
     }
@@ -40,7 +42,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
 })
 
     ; (async () => {
-        const list = await fetch()
+        const { list, desc } = await fetch()
         const gist = await octokit.gists.get({ gist_id: gistId }).catch(error => {
             console.error('Cannot update gist.')
             throw error
@@ -49,6 +51,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
 
         await octokit.gists.update({
             gist_id: gistId,
+            description: desc,
             files: {
                 [fileName]: {
                     fileName: '微博热搜榜',
