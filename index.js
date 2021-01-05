@@ -33,7 +33,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
                 list.push(`${rank},${title},${number}`)
             }
         })
-        return list, desc
+        return { list, desc }
     } else {
         throw new Error('Cannot fetch rank data')
     }
@@ -42,7 +42,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
 })
 
     ; (async () => {
-        const list, desc = await fetch()
+        const { list, desc } = await fetch()
         const gist = await octokit.gists.get({ gist_id: gistId }).catch(error => {
             console.error('Cannot update gist.')
             throw error
