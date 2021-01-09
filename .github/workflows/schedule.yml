@@ -25,6 +25,7 @@ jobs:
           npm install -g yarn
           yarn --frozen-lockfile --non-interactive
       # cron job
+      - uses: actions/upload-artifact@v2
       - name: daily
         uses: ./.github/actions/daily.yml
       - name: weekly
