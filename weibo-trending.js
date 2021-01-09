@@ -43,16 +43,16 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
 
     ; (async () => {
         const { list, desc } = await fetch()
-        const gist = await octokit.gists.get({ gist_id: gistId }).catch(error => {
-            console.error('Cannot update gist.')
-            throw error
-        })
-        const fileName = Object.keys(gist.data.files)[0]
+        // const gist = await octokit.gists.get({ gist_id: gistId }).catch(error => {
+        //     console.error('Cannot update gist.')
+        //     throw error
+        // })
+        // const fileName = Object.keys(gist.data.files)[0]
         await octokit.gists.update({
             gist_id: gistId,
             description: desc,
             files: {
-                [fileName]: {
+                ['weibo-trending.csv']: {
                     fileName: '微博热搜榜',
                     content: list.join('\n')
                 }
