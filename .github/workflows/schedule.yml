@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -26,6 +26,6 @@ jobs:
           yarn --frozen-lockfile --non-interactive
       # cron job
       - name: daily
-        uses: ./.github/actions/daily
+        uses: ./.github/actions/daily.yml
       - name: weekly
-        uses: ./.github/actions/weekly
+        uses: ./.github/actions/weekly.yml
