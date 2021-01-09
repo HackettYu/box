@@ -9,6 +9,8 @@ jobs:
   checker:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
       - name: Run Script
         run: |
           node github.js
