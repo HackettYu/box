@@ -18,10 +18,9 @@ const octokit = new Octokit({ auth: `token ${githubPersonalToken}` });
     const { toal_count, items } = search.data;
     const itemsAsCSV = [['id,full_name,language,stargazers_count,description,url']];
     items.map(({ id, full_name, language, stargazers_count, description, url }) => (
-        itemsAsCSV.push(`${id},${full_name},${language},${stargazers_count},${description},${url}`)
+        itemsAsCSV.push(`${id},${full_name},${language},${stargazers_count},${description.trim().replace(',', '.')},${url}`)
     ));
 
-    console.log(`Total: ${toal_count}`);
     await octokit.gists.update({
         gist_id: gistId,
         description: '',
