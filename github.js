@@ -2,11 +2,11 @@ require('dotenv').config({ path: '.env' });
 const Octokit = require("@octokit/rest");
 
 const {
-    GITHUB_PERSONAL_TOKEN: githubPersonalToken,
+    GH_TOKEN: githubToken,
     GIST_ID: gistId
 } = process.env;
 
-const octokit = new Octokit({ auth: `token ${githubPersonalToken}` });
+const octokit = new Octokit({ auth: `token ${githubToken}` });
 
 (async () => {
     const search = await octokit.search.repos({
@@ -15,6 +15,7 @@ const octokit = new Octokit({ auth: `token ${githubPersonalToken}` });
         console.error('Cannot search repos');
         throw error;
     });
+
     const { toal_count, items } = search.data;
     const itemsAsCSV = [['id,full_name,language,stargazers_count,description,url']];
     items.map(({ id, full_name, language, stargazers_count, description, url }) => (
