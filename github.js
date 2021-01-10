@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '.env' });
+require('dotenv').config();
 const Octokit = require("@octokit/rest");
 
 const {
@@ -11,7 +11,7 @@ const octokit = new Octokit({ auth: `token ${githubToken}` });
 (async () => {
     const search = await octokit.search.repos({
         q: 'stars:>=10000',
-        // 100 is the max
+        // max pagesize is 100
         per_page: '100',
         page: '1'
     }).catch(error => {

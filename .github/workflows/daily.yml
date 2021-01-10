@@ -32,4 +32,3 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GIST_ID: ${{ secrets.GIST_ID }}
-          GITHUB_PERSONAL_TOKEN: ${{ secrets.GH_TOKEN }}
