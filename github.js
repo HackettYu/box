@@ -10,7 +10,10 @@ const octokit = new Octokit({ auth: `token ${githubToken}` });
 
 (async () => {
     const search = await octokit.search.repos({
-        q: 'stars:>=10000'
+        q: 'stars:>=10000',
+        // 100 is the max
+        per_page: '100',
+        page: '1'
     }).catch(error => {
         console.error('Cannot search repos');
         throw error;
@@ -19,7 +22,7 @@ const octokit = new Octokit({ auth: `token ${githubToken}` });
     const { toal_count, items } = search.data;
     const itemsAsCSV = [['id,full_name,language,stargazers_count,description,url']];
     items.map(({ id, full_name, language, stargazers_count, description, url }) => (
-        itemsAsCSV.push(`${id},${full_name},${language},${stargazers_count},${description.trim().replace(',', '.')},${url}`)
+        itemsAsCSV.push(`${id},${full_name},${language},${stargazers_count},${description.trim().replace(/,/g, '.').replace(/"/g, '\'')},${url}`)
     ));
 
     await octokit.gists.update({

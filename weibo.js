@@ -27,7 +27,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
                 let number = 'UNKNOWN';
                 if (res != null)
                     number = res[0].trim()
-                title = title.trim().replace(number, '').replace(',', '.');
+                title = title.trim().replace(number, '').replace(/,/g, '.').replace(/"/g, '\'');
                 list.push(`${rank},${title},${number}`);
             }
         })
