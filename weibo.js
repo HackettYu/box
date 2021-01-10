@@ -20,10 +20,9 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
             const target = $(this)
             const rank = target.find('.hot').text()
             let title = target.find('span').text()
+            console.log(`Title: ${title}`);
             if (rank == null || Number(rank) <= 0) {
                 list.push(`rank,title,number`)
-                // this is a pinned title
-                desc = `# Pin ${title}`
             } else {
                 const res = /[0-9]+[\s]*$/.exec(title)
                 let number = 'UNKNOWN'
@@ -43,14 +42,9 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
 
     ; (async () => {
         const { list, desc } = await fetch()
-        // const gist = await octokit.gists.get({ gist_id: gistId }).catch(error => {
-        //     console.error('Cannot update gist.')
-        //     throw error
-        // })
-        // const fileName = Object.keys(gist.data.files)[0]
         await octokit.gists.update({
             gist_id: gistId,
-            description: desc,
+            description: '',
             files: {
                 ['weibo-trending.csv']: {
                     fileName: '微博热搜榜',
@@ -58,7 +52,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
                 }
             }
         }).catch(error => {
-            console.error('Cannot update gist.')
+            console.error('Cannot update gist.');
             throw error
         })
     })()

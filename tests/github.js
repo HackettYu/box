@@ -11,8 +11,8 @@ const octokit = new Octokit({ auth: `token ${githubPersonalToken}` });
 ; (async () => {
     const search = await octokit.search.repos({
         q: 'stars:>=10000',
-        per_page: '1',
-        page: '1'
+        // per_page: '1',
+        // page: '1'
     }).catch(error => {
         console.error('Cannot search repos');
         throw error;

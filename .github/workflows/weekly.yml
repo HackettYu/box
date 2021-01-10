@@ -1,8 +1,10 @@
-name: "Github Action: updated gist"
+name: "Github Action: updated gist e week"
 on:
   push:
     branches:
       - master
+  schedule:
+    - cron: "* * * * 1"
 jobs:
   checker:
     runs-on: ubuntu-latest
@@ -24,8 +26,10 @@ jobs:
         run: |
           npm install -g yarn
           yarn --frozen-lockfile --non-interactive
-      # cron job
-      - name: daily
-        uses: ./.github/actions/daily.yml
-      - name: weekly
-        uses: ./.github/actions/weekly.yml
+      - name: Run Script
+        run: |
+          node github.js
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
+          GITHUB_PERSONAL_TOKEN: ${{ secrets.GH_TOKEN }}
