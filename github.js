@@ -8,7 +8,7 @@ const {
 
 const octokit = new Octokit({ auth: `token ${githubPersonalToken}` });
 
-; (async () => {
+(async () => {
     const search = await octokit.search.repos({
         q: 'stars:>=10000'
     }).catch(error => {
@@ -32,7 +32,7 @@ const octokit = new Octokit({ auth: `token ${githubPersonalToken}` });
             }
         }
     }).catch(error => {
-        console.error('Cannot update gist.')
-        throw error
+        console.error('Cannot update gist.');
+        throw error;
     })
 })();
