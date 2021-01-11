@@ -25,7 +25,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install -g yarn
-          yarn --frozen-lockfile --non-interactive
+          yarn --frozen-lockfile --non-interactive --no-lockfile
       - name: Run Script
         run: |
           node weibo.js
