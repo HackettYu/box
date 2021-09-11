@@ -1,6 +1,6 @@
 require('dotenv').config();
 const got = require('got')
-const Octokit = require("@octokit/rest");
+const { Octokit } = require("@octokit/rest");
 
 const {
     GH_TOKEN: githubToken,

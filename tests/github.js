@@ -1,5 +1,5 @@
 require('dotenv').config({ path: '.env' });
-const Octokit = require("@octokit/rest");
+const { Octokit } = require("@octokit/rest");
 
 const {
     GITHUB_PERSONAL_TOKEN: githubPersonalToken,
