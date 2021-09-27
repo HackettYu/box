@@ -49,8 +49,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 6000
         fileName: '微博热搜榜',
         content: list.join('\n')
       }
-    },
-    timeout: 60000
+    }
   }).catch(error => {
     console.error('Cannot update gist.')
     throw error
