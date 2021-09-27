@@ -10,7 +10,7 @@ const {
 
 const octokit = new Octokit({ auth: `token ${githubToken}` })
 
-const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 600 }).then(res => {
+const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 60000 }).then(res => {
   if (res.status === 200) {
     const { data } = res
     const $ = cheerio.load(data)
