@@ -10,7 +10,7 @@ const {
 
 const octokit = new Octokit({ auth: `token ${githubToken}` })
 
-const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: '300' }).then(res => {
+const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 600 }).then(res => {
   if (res.status === 200) {
     const { data } = res
     const $ = cheerio.load(data)
@@ -50,7 +50,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: '300
         content: list.join('\n')
       }
     },
-    timeout: 300
+    timeout: 600
   }).catch(error => {
     console.error('Cannot update gist.')
     throw error
