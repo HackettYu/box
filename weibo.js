@@ -2,6 +2,7 @@ require('dotenv').config()
 const { Octokit } = require('@octokit/rest')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const signale = require('signale')
 
 const {
   WEIBO_GIST_ID: gistId,
@@ -47,6 +48,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
   const { list, desc } = await fetch()
   const gist = await octokit.gists.get({ gist_id: gistId })
   const fileName = Object.keys(gist.data.files)[0]
+  signale.pending(`${fileName} ${list[1]}`)
   await octokit.gists.update({
     gist_id: gistId,
     description: desc,
