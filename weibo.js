@@ -10,7 +10,7 @@ const {
 
 const octokit = new Octokit({ auth: `token ${githubToken}` })
 
-const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 60000 }).then(res => {
+const fetch = () => axios.get('https://s.weibo.com/top/summary').then(res => {
   if (res.status === 200) {
     const { data } = res
     const $ = cheerio.load(data)
@@ -30,6 +30,11 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 6000
         list.push(`${rank},${title},${number}`)
       }
     })
+
+    if (list.length === 0) {
+      throw new Error('Cannot fetch rank data')
+    }
+
     return { list, desc }
   } else {
     throw new Error('Cannot fetch rank data')
