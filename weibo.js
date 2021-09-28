@@ -1,5 +1,5 @@
 require('dotenv').config()
-const Octokit = require('@octokit/rest')
+const { Octokit } = require('@octokit/rest')
 const axios = require('axios')
 const cheerio = require('cheerio')
 
@@ -40,10 +40,9 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 6000
 
 (async () => {
   const { list, desc } = await fetch()
-  console.log(desc)
   await octokit.gists.update({
     gist_id: gistId,
-    description: '',
+    description: desc,
     files: {
       'weibo-trending.csv': {
         fileName: '微博热搜榜',
