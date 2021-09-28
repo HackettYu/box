@@ -31,5 +31,5 @@ jobs:
           node weibo.js
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GIST_ID: ${{ secrets.GIST_ID }}
+          WEIBO_GIST_ID: ${{ secrets.WEIBO_GIST_ID }}
           
