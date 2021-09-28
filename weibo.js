@@ -4,7 +4,7 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 
 const {
-  GIST_ID: gistId,
+  WEIBO_GIST_ID: gistId,
   GH_TOKEN: githubToken
 } = process.env
 
@@ -42,7 +42,7 @@ const fetch = () => axios.get('https://s.weibo.com/top/summary', { timeout: 6000
   const { list, desc } = await fetch()
   await octokit.gists.update({
     gist_id: gistId,
-    description: desc,
+    description: '',
     files: {
       'weibo-trending.csv': {
         fileName: '微博热搜榜',
